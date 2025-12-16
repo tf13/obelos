@@ -19,6 +19,8 @@ A powerful Firefox extension that allows you to highlight text, add annotations,
 - Add optional annotation text
 - Click any highlight to view, edit, or delete
 - Copy direct link to any highlight
+- Annotations shown as tooltips on hover
+- Dotted underline indicates highlights with annotations
 
 ### 🔖 Bookmarks (Anchors)
 - Create position markers without selecting text
@@ -35,8 +37,13 @@ A powerful Firefox extension that allows you to highlight text, add annotations,
 ### 🔗 Direct Linking
 - Every highlight and bookmark gets a unique ID
 - Share exact positions on pages via URL fragments
-- Links automatically scroll to and highlight the target
+- Links automatically scroll to and flash the target
 - Perfect for collaboration and documentation
+
+### 📄 XHTML/XML Support
+- Works on complex documents like SEC EDGAR filings
+- Uses iframe-based toolbar for style isolation
+- Compatible with XBRL and other XML formats
 
 ## Installation
 
@@ -87,11 +94,11 @@ Or package as a signed XPI:
 
 ### Managing Highlights & Bookmarks
 
-**Click on any highlight or bookmark** to open a context menu with options:
+**Click on any highlight or bookmark** to open a menu with options:
 
-- **📋 Copy Link**: Copy a direct URL to this item
-- **✏️ Edit/Add Note**: Add or edit the annotation
-- **🗑️ Delete**: Remove the highlight or bookmark
+- **Press 1**: Copy a direct URL to this item
+- **Press 2**: Add or edit the annotation
+- **Press 3**: Delete the highlight or bookmark
 
 ### Using the Popup Menu
 
@@ -158,7 +165,7 @@ Bookmarks store:
 ## File Structure
 
 ```
-highlight-annotator/
+obelos/
 ├── manifest.json          # Extension configuration
 ├── content.js            # Main functionality script
 ├── content.css           # Styles for highlights and UI
@@ -170,21 +177,25 @@ highlight-annotator/
 │   ├── icon32.png
 │   ├── icon48.png
 │   └── icon96.png
+├── INSTALL.md           # Quick installation guide
 └── README.md            # This file
 ```
 
 ## Browser Compatibility
 
 - **Firefox**: 57+ (uses WebExtensions API)
+- **Chrome**: Supported (uses Chrome extensions API)
 - **Firefox Mobile**: Supported
-- Uses standard Web APIs for maximum compatibility
+- **XHTML/XML Documents**: Fully supported (uses iframe-based toolbar for isolation)
+- Works on SEC EDGAR filings and other XBRL documents
 
 ## Limitations
 
 - Highlights may not persist if page structure changes significantly
 - Dynamic content (SPAs with heavy DOM manipulation) may lose highlights
 - Some websites with strict CSP may have limited functionality
-- Iframes and shadow DOM are not currently supported
+- Iframes within pages are not currently supported
+- Text spanning many DOM nodes may not restore perfectly
 
 ## Privacy
 

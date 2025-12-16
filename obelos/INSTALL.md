@@ -49,10 +49,11 @@ After installation:
 
 Try these actions:
 - ✅ Select text and highlight it
-- ✅ Click a highlight to see the menu
-- ✅ Click "Copy Link" and paste it in a new tab
+- ✅ Click a highlight to see the menu (press 1/2/3 for actions)
+- ✅ Press 1 to copy link and paste it in a new tab
 - ✅ Click the extension icon to toggle visibility
 - ✅ Reload the page - highlights persist!
+- ✅ Hover over annotated highlights to see tooltips
 
 ## Need Help?
 
