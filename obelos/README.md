@@ -1,3 +1,5 @@
+<img src="icons/obelos_20251216-128.png" align="right" width="64" alt="Obelos">
+
 # Obelos - Firefox Extension
 
 A powerful Firefox extension that allows you to highlight text, add annotations, and create bookmarks on any webpage with persistent storage and direct linking capabilities.
