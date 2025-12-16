@@ -1,0 +1,47 @@
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+
+# IDE/Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Build artifacts
+*.zip
+*.xpi
+*.crx
+web-ext-artifacts/
+
+# Node.js (if added later)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment and credentials
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets.json
+credentials.json
+api_keys.json
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Firefox extension signing
+*.xpi.sig
+
+# Chrome extension packaging
+*.pem

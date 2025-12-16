@@ -1,0 +1,264 @@
+/* Highlight styles */
+.ha-highlight {
+  cursor: pointer;
+  position: relative;
+  transition: opacity 0.2s ease;
+  border-radius: 2px;
+  padding: 1px 0;
+}
+
+.ha-highlight.has-annotation::after {
+  content: '📝';
+  font-size: 10px;
+  margin-left: 2px;
+  opacity: 0.7;
+}
+
+.ha-highlight:hover {
+  opacity: 0.8;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Anchor marker */
+.ha-anchor-marker {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 0 2px;
+  padding: 2px;
+  transition: transform 0.2s ease;
+  position: relative;
+}
+
+.ha-anchor-marker:hover {
+  transform: scale(1.3);
+}
+
+.ha-anchor-marker.has-annotation::after {
+  content: '✓';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  font-size: 8px;
+  color: #4CAF50;
+}
+
+/* Flash animation for navigation */
+@keyframes flash {
+  0%, 100% { background-color: transparent; }
+  50% { background-color: rgba(255, 235, 59, 0.5); }
+}
+
+.ha-flash {
+  animation: flash 1s ease-in-out 2;
+}
+
+/* Hide highlights when toggled */
+.ha-hidden .ha-highlight {
+  background-color: transparent !important;
+}
+
+.ha-hidden .ha-highlight.has-annotation::after {
+  display: none;
+}
+
+.ha-hidden .ha-anchor-marker {
+  display: none;
+}
+
+/* Floating toolbar */
+.ha-toolbar {
+  position: fixed !important;
+  z-index: 2147483647 !important;
+  background: white !important;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+  padding: 12px;
+  display: none;
+  min-width: 280px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 14px;
+  pointer-events: auto !important;
+}
+
+.ha-toolbar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.ha-toolbar-title {
+  font-weight: 600;
+  color: #333;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ha-toolbar-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #666;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.ha-toolbar-close:hover {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Color buttons */
+.ha-toolbar-colors {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.ha-color-btn {
+  width: 32px;
+  height: 32px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.ha-color-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.ha-color-btn.active {
+  border-color: #333;
+  box-shadow: 0 0 0 2px white, 0 0 0 4px #333;
+}
+
+/* Action buttons */
+.ha-toolbar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ha-action-btn {
+  background: #f5f5f5;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.ha-action-btn:hover {
+  background: #e0e0e0;
+  transform: translateX(2px);
+}
+
+.ha-icon {
+  font-size: 14px;
+}
+
+/* Context menu */
+.ha-context-menu {
+  position: absolute;
+  z-index: 2147483647;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 8px;
+  min-width: 180px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 14px;
+}
+
+.ha-menu-header {
+  font-weight: 600;
+  color: #333;
+  padding: 6px 8px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 4px;
+}
+
+.ha-menu-annotation {
+  padding: 8px;
+  background: #f9f9f9;
+  border-radius: 4px;
+  margin: 4px 0 8px 0;
+  font-size: 12px;
+  color: #555;
+  border-left: 3px solid #2196F3;
+  max-width: 250px;
+  word-wrap: break-word;
+}
+
+.ha-menu-btn {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 8px 10px;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+  font-family: inherit;
+}
+
+.ha-menu-btn:hover {
+  background: #f5f5f5;
+}
+
+/* Notification */
+.ha-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 2147483647;
+  background: #323232;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 14px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.ha-notification.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Ensure proper text selection */
+.ha-highlight::selection {
+  background: rgba(0, 123, 255, 0.3);
+}

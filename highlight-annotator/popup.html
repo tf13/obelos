@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Highlight & Annotate</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <div class="popup-header">
+      <h1>Highlight & Annotate</h1>
+    </div>
+    
+    <div class="popup-stats">
+      <div class="stat-item">
+        <span class="stat-icon">✏️</span>
+        <span class="stat-label">Highlights:</span>
+        <span class="stat-value" id="highlights-count">0</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-icon">🔖</span>
+        <span class="stat-label">Bookmarks:</span>
+        <span class="stat-value" id="anchors-count">0</span>
+      </div>
+    </div>
+
+    <div class="popup-section">
+      <h2>Color Selection</h2>
+      <div class="color-grid" id="color-grid">
+        <button class="color-option active" data-color="yellow" style="background-color: #FFEB3B;" title="Yellow"></button>
+        <button class="color-option" data-color="green" style="background-color: #81C784;" title="Green"></button>
+        <button class="color-option" data-color="blue" style="background-color: #64B5F6;" title="Blue"></button>
+        <button class="color-option" data-color="pink" style="background-color: #F48FB1;" title="Pink"></button>
+        <button class="color-option" data-color="orange" style="background-color: #FFB74D;" title="Orange"></button>
+        <button class="color-option" data-color="purple" style="background-color: #BA68C8;" title="Purple"></button>
+      </div>
+    </div>
+
+    <div class="popup-section">
+      <h2>Actions</h2>
+      <button class="action-button" id="toggle-visibility">
+        <span class="button-icon">👁️</span>
+        <span id="visibility-text">Hide Highlights</span>
+      </button>
+      <button class="action-button danger" id="clear-all">
+        <span class="button-icon">🗑️</span>
+        Clear All
+      </button>
+    </div>
+
+    <div class="popup-section">
+      <h2>How to Use</h2>
+      <ul class="instructions">
+        <li>Select text and choose a color to highlight</li>
+        <li>Click "Add Note" to annotate highlights</li>
+        <li>Click "Bookmark" to mark a position</li>
+        <li>Click any highlight/bookmark to copy its link</li>
+        <li>All data persists across page visits</li>
+      </ul>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
