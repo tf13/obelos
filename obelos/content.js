@@ -35,18 +35,18 @@
 
   // Initialize the extension
   function init() {
-    console.log('[Highlight & Annotate] Initializing extension...');
+    console.log('[Obelos] Initializing extension...');
     
     // Make sure body exists before creating toolbar
     if (!document.body) {
-      console.warn('[Highlight & Annotate] Body not ready, waiting...');
+      console.warn('[Obelos] Body not ready, waiting...');
       setTimeout(init, 100);
       return;
     }
     
     // Prevent double initialization
     if (document.getElementById('ha-toolbar-iframe')) {
-      console.log('[Highlight & Annotate] Already initialized');
+      console.log('[Obelos] Already initialized');
       return;
     }
     
@@ -58,7 +58,7 @@
     loadData().then(() => {
       restoreHighlights();
       restoreAnchors();
-      console.log('[Highlight & Annotate] Extension initialized successfully');
+      console.log('[Obelos] Extension initialized successfully');
     });
   }
 
@@ -69,10 +69,10 @@
         highlights = result[pageKey].highlights || [];
         anchors = result[pageKey].anchors || [];
         highlightsVisible = result[pageKey].visible !== false;
-        console.log('[Highlight & Annotate] Loaded', highlights.length, 'highlights and', anchors.length, 'anchors');
+        console.log('[Obelos] Loaded', highlights.length, 'highlights and', anchors.length, 'anchors');
       }
     }).catch(err => {
-      console.error('[Highlight & Annotate] Error loading data:', err);
+      console.error('[Obelos] Error loading data:', err);
     });
   }
 
@@ -83,17 +83,17 @@
       anchors: anchors,
       visible: highlightsVisible
     };
-    console.log('[Highlight & Annotate] Saving data:', highlights.length, 'highlights,', anchors.length, 'anchors');
+    console.log('[Obelos] Saving data:', highlights.length, 'highlights,', anchors.length, 'anchors');
     browserAPI.storage.local.set({ [pageKey]: data }).then(() => {
-      console.log('[Highlight & Annotate] Data saved successfully');
+      console.log('[Obelos] Data saved successfully');
     }).catch(err => {
-      console.error('[Highlight & Annotate] Error saving data:', err);
+      console.error('[Obelos] Error saving data:', err);
     });
   }
 
   // Create floating toolbar using iframe for complete isolation
   function createToolbar() {
-    console.log('[Highlight & Annotate] Creating toolbar iframe...');
+    console.log('[Obelos] Creating toolbar iframe...');
     
     // Create the HTML content for the toolbar - compact horizontal layout
     const toolbarHTML = `<!DOCTYPE html>
@@ -228,9 +228,9 @@ body {
       }
     });
     
-    console.log('[Highlight & Annotate] Toolbar iframe created with data URL');
-    console.log('[Highlight & Annotate] Iframe element:', toolbarIframe);
-    console.log('[Highlight & Annotate] Iframe in DOM:', document.body.contains(toolbarIframe));
+    console.log('[Obelos] Toolbar iframe created with data URL');
+    console.log('[Obelos] Iframe element:', toolbarIframe);
+    console.log('[Obelos] Iframe in DOM:', document.body.contains(toolbarIframe));
   }
   
   // Set up event listeners inside the iframe - not needed with postMessage approach
@@ -328,7 +328,7 @@ body {
     toolbarIframe.style.left = left + 'px';
     toolbarIframe.style.top = top + 'px';
     
-    console.log('[Highlight & Annotate] Toolbar shown at', left, top);
+    console.log('[Obelos] Toolbar shown at', left, top);
   }
 
   // Hide toolbar
@@ -342,7 +342,7 @@ body {
   function createHighlightFromSelection(withAnnotation = false) {
     // Use saved selection
     if (!savedSelection) {
-      console.log('[Highlight & Annotate] No saved selection');
+      console.log('[Obelos] No saved selection');
       return;
     }
 
@@ -373,7 +373,7 @@ body {
       saveData();
       showNotification('Highlight added');
     } catch (e) {
-      console.error('[Highlight & Annotate] Error creating highlight:', e);
+      console.error('[Obelos] Error creating highlight:', e);
       showNotification('Could not highlight this selection');
     }
 
@@ -403,14 +403,14 @@ body {
     try {
       // Clone the range to avoid modifying the original
       const clonedRange = range.cloneRange();
-      console.log('[Highlight & Annotate] Applying highlight with surroundContents, range:', 
+      console.log('[Obelos] Applying highlight with surroundContents, range:', 
         clonedRange.startContainer.nodeName, clonedRange.startOffset, 
         'to', clonedRange.endContainer.nodeName, clonedRange.endOffset);
       clonedRange.surroundContents(span);
-      console.log('[Highlight & Annotate] surroundContents succeeded, span parent:', span.parentNode ? span.parentNode.nodeName : 'NO PARENT');
+      console.log('[Obelos] surroundContents succeeded, span parent:', span.parentNode ? span.parentNode.nodeName : 'NO PARENT');
     } catch (e) {
       // If surroundContents fails (crosses element boundaries), highlight text nodes individually
-      console.log('[Highlight & Annotate] surroundContents failed:', e.message, '- using fallback');
+      console.log('[Obelos] surroundContents failed:', e.message, '- using fallback');
       highlightRangeNodes(range, id, color, annotation);
     }
   }
@@ -516,7 +516,7 @@ body {
 
   // Restore highlights from storage
   function restoreHighlights() {
-    console.log('[Highlight & Annotate] Restoring', highlights.length, 'highlights');
+    console.log('[Obelos] Restoring', highlights.length, 'highlights');
     
     highlights.forEach(highlightData => {
       try {
@@ -528,36 +528,36 @@ body {
           highlightData.annotation
         );
         if (found) {
-          console.log('[Highlight & Annotate] Restored highlight:', highlightData.text.substring(0, 30));
+          console.log('[Obelos] Restored highlight:', highlightData.text.substring(0, 30));
         } else {
-          console.warn('[Highlight & Annotate] Could not find text to restore:', highlightData.text.substring(0, 30));
+          console.warn('[Obelos] Could not find text to restore:', highlightData.text.substring(0, 30));
         }
       } catch (e) {
-        console.error('[Highlight & Annotate] Error restoring highlight:', e);
+        console.error('[Obelos] Error restoring highlight:', e);
       }
     });
   }
   
   // Restore anchors from storage
   function restoreAnchors() {
-    console.log('[Highlight & Annotate] Restoring', anchors.length, 'anchors');
+    console.log('[Obelos] Restoring', anchors.length, 'anchors');
     // Anchors are harder to restore without exact position - skip for now
   }
   
   // Find text in document and apply highlight
   function findAndHighlightText(searchText, id, color, annotation) {
-    console.log('[Highlight & Annotate] Finding text:', JSON.stringify(searchText));
+    console.log('[Obelos] Finding text:', JSON.stringify(searchText));
     
     // Log character codes to detect hidden characters
     const charCodes = [];
     for (let i = 0; i < searchText.length; i++) {
       charCodes.push(searchText.charCodeAt(i));
     }
-    console.log('[Highlight & Annotate] Search text char codes:', charCodes.join(','));
+    console.log('[Obelos] Search text char codes:', charCodes.join(','));
     
     // Skip if already exists
     if (document.getElementById(id)) {
-      console.log('[Highlight & Annotate] Element already exists:', id);
+      console.log('[Obelos] Element already exists:', id);
       return true;
     }
     
@@ -595,11 +595,11 @@ body {
           const range = document.createRange();
           range.setStart(textNode, idx);
           range.setEnd(textNode, idx + searchText.length);
-          console.log('[Highlight & Annotate] Found exact match in single node');
+          console.log('[Obelos] Found exact match in single node');
           applyHighlight(range, id, color, annotation);
           return true;
         } catch (e) {
-          console.error('[Highlight & Annotate] Error creating range:', e);
+          console.error('[Obelos] Error creating range:', e);
         }
       }
     }
@@ -621,15 +621,15 @@ body {
     
     // Debug: Check if text exists anywhere in fullText
     if (fullText.includes('689,231')) {
-      console.log('[Highlight & Annotate] Found 689,231 in fullText!');
+      console.log('[Obelos] Found 689,231 in fullText!');
       // Find position and show surrounding context
       const pos = fullText.indexOf('689,231');
-      console.log('[Highlight & Annotate] Context:', JSON.stringify(fullText.substring(Math.max(0, pos-10), pos+20)));
+      console.log('[Obelos] Context:', JSON.stringify(fullText.substring(Math.max(0, pos-10), pos+20)));
     }
     
     // Search in the concatenated text
     const searchIdx = fullText.indexOf(searchText);
-    console.log('[Highlight & Annotate] Cross-node search index:', searchIdx);
+    console.log('[Obelos] Cross-node search index:', searchIdx);
     
     if (searchIdx !== -1) {
       const searchEnd = searchIdx + searchText.length;
@@ -655,11 +655,11 @@ body {
           const range = document.createRange();
           range.setStart(startNode, startOffset);
           range.setEnd(endNode, endOffset);
-          console.log('[Highlight & Annotate] Found match across nodes');
+          console.log('[Obelos] Found match across nodes');
           applyHighlight(range, id, color, annotation);
           return true;
         } catch (e) {
-          console.error('[Highlight & Annotate] Error with cross-node range:', e);
+          console.error('[Obelos] Error with cross-node range:', e);
         }
       }
     }
@@ -702,16 +702,16 @@ body {
           const range = document.createRange();
           range.setStart(startNode, startOffset);
           range.setEnd(endNode, endOffset);
-          console.log('[Highlight & Annotate] Found normalized match');
+          console.log('[Obelos] Found normalized match');
           applyHighlight(range, id, color, annotation);
           return true;
         } catch (e) {
-          console.error('[Highlight & Annotate] Error with normalized range:', e);
+          console.error('[Obelos] Error with normalized range:', e);
         }
       }
     }
     
-    console.warn('[Highlight & Annotate] Could not find text in any form');
+    console.warn('[Obelos] Could not find text in any form');
     return false;
   }
 

@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Highlight & Annotate",
+  "name": "Obelos",
   "version": "1.0.0",
   "description": "Highlight text, add annotations, and create bookmarks on any webpage with persistent storage",
   "permissions": [

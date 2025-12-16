@@ -1,4 +1,4 @@
-# Highlight & Annotate Firefox Extension - Complete Package
+# Obelos Firefox Extension - Complete Package
 
 ## 📦 What's Included
 
@@ -17,7 +17,7 @@ Your complete Firefox extension with all requested features!
 - `INSTALL.md` - Installation instructions
 - `FEATURES.md` - Feature showcase and use cases
 - `FAQ.md` - Troubleshooting and FAQs
-- `highlight-annotator.zip` - Ready-to-install package
+- `obelos.zip` - Ready-to-install package
 
 ## ✨ Features Implemented
 

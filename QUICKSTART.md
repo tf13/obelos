@@ -8,7 +8,7 @@
 2. Type `about:debugging` in the address bar
 3. Click **"This Firefox"** on the left
 4. Click **"Load Temporary Add-on..."**
-5. Navigate to the `highlight-annotator` folder
+5. Navigate to the `obelos` folder
 6. Select `manifest.json`
 7. ✅ Installed!
 

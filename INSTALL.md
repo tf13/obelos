@@ -8,7 +8,7 @@
 2. Type `about:debugging` in the address bar and press Enter
 3. Click **"This Firefox"** on the left
 4. Click **"Load Temporary Add-on..."**
-5. Browse to the `highlight-annotator` folder
+5. Browse to the `obelos` folder
 6. Select `manifest.json`
 7. Done! The extension is now active
 
@@ -21,7 +21,7 @@
 2. Search for `xpinstall.signatures.required`
 3. Double-click to set it to `false`
 4. Create a ZIP file of the extension folder
-5. Rename it to `highlight-annotator.xpi`
+5. Rename it to `obelos.xpi`
 6. Drag and drop the XPI into Firefox
 7. Click "Add" to install
 

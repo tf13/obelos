@@ -1,4 +1,4 @@
-# Highlight & Annotate - Firefox Extension
+# Obelos - Firefox Extension
 
 A powerful Firefox extension that allows you to highlight text, add annotations, and create bookmarks on any webpage with persistent storage and direct linking capabilities.
 

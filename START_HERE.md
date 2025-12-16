@@ -1,22 +1,22 @@
-# 🎉 Welcome to Highlight & Annotate!
+# 🎉 Welcome to Obelos!
 
 ## Quick Navigation
 
 ### 🚀 **Want to Get Started Right Away?**
-👉 Read **[QUICKSTART.md](highlight-annotator/QUICKSTART.md)** (3 minutes)
+👉 Read **[QUICKSTART.md](obelos/QUICKSTART.md)** (3 minutes)
 
 ### 💾 **Ready to Install?**
-👉 Read **[INSTALL.md](highlight-annotator/INSTALL.md)**  
-Or use **[highlight-annotator.zip](highlight-annotator.zip)** for quick installation
+👉 Read **[INSTALL.md](obelos/INSTALL.md)**  
+Or use **[obelos.zip](obelos.zip)** for quick installation
 
 ### 📖 **Want Full Documentation?**
-👉 Read **[README.md](highlight-annotator/README.md)**
+👉 Read **[README.md](obelos/README.md)**
 
 ### ✨ **Want to See All Features?**
-👉 Read **[FEATURES.md](highlight-annotator/FEATURES.md)**
+👉 Read **[FEATURES.md](obelos/FEATURES.md)**
 
 ### ❓ **Have Questions or Problems?**
-👉 Read **[FAQ.md](highlight-annotator/FAQ.md)**
+👉 Read **[FAQ.md](obelos/FAQ.md)**
 
 ### 📊 **Want the Complete Overview?**
 👉 Read **[SUMMARY.md](SUMMARY.md)**
@@ -42,8 +42,8 @@ This is a complete Firefox extension that allows you to:
 ## Files Included
 
 ### Extension Files
-- `highlight-annotator/` - Complete extension folder
-- `highlight-annotator.zip` - Ready-to-install package
+- `obelos/` - Complete extension folder
+- `obelos.zip` - Ready-to-install package
 
 ### Documentation
 - `QUICKSTART.md` - Get started in 3 minutes ⭐

@@ -1,4 +1,4 @@
-# Highlight & Annotate - Feature Showcase
+# Obelos - Feature Showcase
 
 ## Visual Guide to Features
 
