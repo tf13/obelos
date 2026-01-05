@@ -123,9 +123,10 @@ Click the extension icon in your toolbar to access:
 
 1. Click the extension icon and select **Settings**
 2. Choose **remoteStorage** as your storage provider
-3. Connect to a remoteStorage provider (e.g., [5apps](https://5apps.com/storage))
-4. Your highlights will now sync across all connected browsers
-5. Use **Upload Local Data to Remote** to migrate existing highlights
+3. Enter your remoteStorage address (e.g., `yourname@5apps.com`)
+4. Click **Connect** - an OAuth popup will appear for authorization
+5. Once connected, your highlights will sync across all connected browsers
+6. Use **Upload Local Data to Remote** to migrate existing highlights
 
 ### Sharing Links
 
@@ -155,9 +156,10 @@ Two storage backends available:
 **remoteStorage (Optional)**
 - Enable in Settings to sync across devices
 - Uses the [remoteStorage](https://remotestorage.io/) open protocol
-- Compatible with 5apps, self-hosted servers, or any remoteStorage provider
-- Full dataset syncs on startup
-- Saves locally first, then syncs (offline-first)
+- Compatible with [5apps](https://5apps.com/storage), self-hosted servers, or any remoteStorage provider
+- **Local-first architecture**: All data saved to local storage immediately, synced to remote in background
+- Works offline - syncs when connection is available
+- Uses `browser.identity` API for secure OAuth authentication
 
 ### URL Fragments
 
@@ -197,14 +199,12 @@ obelos/
 ├── manifest.json         # Extension configuration
 ├── content.js            # Main functionality script
 ├── content.css           # Styles for highlights and UI
-├── storage.js            # Storage abstraction layer
+├── storage.js            # Storage abstraction layer (local-first)
 ├── background.js         # Background script for sync
-├── rs-module.js          # remoteStorage module definition
 ├── popup.html/css/js     # Browser action popup
-├── options.html/css/js   # Settings page
+├── options.html/css/js   # Settings page with OAuth connection
 ├── lib/
-│   ├── remotestorage.min.js
-│   └── remotestorage-widget.js
+│   └── remotestorage.min.js  # remoteStorage.js library
 ├── icons/                # Extension icons
 ├── INSTALL.md            # Quick installation guide
 └── README.md             # This file

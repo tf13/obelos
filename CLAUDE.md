@@ -23,14 +23,12 @@ obelos/
 ├── manifest.json       # Extension config (manifest_version 2)
 ├── content.js          # Main logic - injected into all pages
 ├── content.css         # Highlight and marker styles
-├── storage.js          # Storage abstraction layer
+├── storage.js          # Storage abstraction layer (local-first with remote sync)
 ├── background.js       # Background script for remoteStorage sync
-├── rs-module.js        # remoteStorage module definition
 ├── popup.html/js/css   # Browser action toolbar UI
-├── options.html/js/css # Settings page with remoteStorage widget
+├── options.html/js/css # Settings page with OAuth connection UI
 └── lib/
-    ├── remotestorage.min.js    # remoteStorage.js library
-    └── remotestorage-widget.js # Login widget
+    └── remotestorage.min.js    # remoteStorage.js library
 ```
 
 ### Data Flow
@@ -71,19 +69,27 @@ Data stored per-page with URL (without fragments) as key:
 ### remoteStorage Integration
 
 - **Storage abstraction** (`storage.js`): `ObelosStorage` manager with `LocalStorageProvider` and `RemoteStorageProvider`
-- **Background script** (`background.js`): Manages single remoteStorage instance, handles sync, broadcasts changes to tabs
-- **Module** (`rs-module.js`): Defines `obelos` module with `PageData` schema, URL-to-path encoding
-- **Options page**: remoteStorage widget for connecting to providers (5apps, self-hosted)
+- **Local-first architecture**: Always reads/writes to local storage first, syncs to remote in background
+- **Options page** (`options.js`): Custom OAuth flow using `browser.identity.launchWebAuthFlow()` for browser extension compatibility
+- **Background script** (`background.js`): Handles remote storage operations via message passing
+
+OAuth flow (options.js):
+1. User enters remoteStorage address (e.g., `user@5apps.com`)
+2. WebFinger lookup discovers OAuth endpoint
+3. `browser.identity.launchWebAuthFlow()` handles OAuth popup
+4. Credentials stored in `browser.storage.local` for reconnection
 
 Communication flow:
 ```
-content.js → ObelosStorage.save() → sendMessage('rs-save') → background.js → remoteStorage.obelos.savePage()
+content.js → ObelosStorage.save() → LocalStorageProvider.save() (immediate)
+                                  → sendMessage('rs-save') → background.js (async sync)
 ```
 
 Sync behavior:
-- Full dataset sync on startup
-- Last-write-wins conflict resolution
-- Offline-first: saves to local storage as fallback
+- **Local-first**: All reads/writes go to local storage immediately
+- **Background sync**: Remote sync happens asynchronously, non-blocking
+- **Last-write-wins**: Simple conflict resolution
+- **Offline support**: Works without network, syncs when connected
 
 ### Highlight Restoration Algorithm
 
