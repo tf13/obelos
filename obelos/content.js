@@ -262,9 +262,19 @@ body {
     // Document-level interactions
     document.addEventListener('click', handleClick);
     document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('keydown', handleKeyDown);
 
     // Message listener for popup commands
     browserAPI.runtime.onMessage.addListener(handleMessage);
+  }
+
+  // Handle keyboard events
+  function handleKeyDown(e) {
+    if (e.key === 'Escape') {
+      hideToolbar();
+      savedSelection = null;
+      window.getSelection().removeAllRanges();
+    }
   }
 
   // Handle messages from popup
