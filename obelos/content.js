@@ -34,26 +34,31 @@
   }
 
   // Initialize the extension
-  function init() {
+  async function init() {
     console.log('[Obelos] Initializing extension...');
-    
+
     // Make sure body exists before creating toolbar
     if (!document.body) {
       console.warn('[Obelos] Body not ready, waiting...');
       setTimeout(init, 100);
       return;
     }
-    
+
     // Prevent double initialization
     if (document.getElementById('ha-toolbar-iframe')) {
       console.log('[Obelos] Already initialized');
       return;
     }
-    
+
+    // Initialize storage manager
+    if (window.ObelosStorage) {
+      await window.ObelosStorage.init();
+    }
+
     createToolbar();
     attachEventListeners();
     checkForHashNavigation();
-    
+
     // Load data and then restore - this is async
     loadData().then(() => {
       restoreHighlights();
@@ -63,32 +68,46 @@
   }
 
   // Load data from storage - now returns a Promise
-  function loadData() {
-    return browserAPI.storage.local.get([pageKey]).then(result => {
-      if (result[pageKey]) {
-        highlights = result[pageKey].highlights || [];
-        anchors = result[pageKey].anchors || [];
-        highlightsVisible = result[pageKey].visible !== false;
-        console.log('[Obelos] Loaded', highlights.length, 'highlights and', anchors.length, 'anchors');
+  async function loadData() {
+    try {
+      let data;
+      if (window.ObelosStorage) {
+        data = await window.ObelosStorage.load(pageKey);
+      } else {
+        // Fallback to direct storage access
+        const result = await browserAPI.storage.local.get([pageKey]);
+        data = result[pageKey] || {};
       }
-    }).catch(err => {
+
+      highlights = data.highlights || [];
+      anchors = data.anchors || [];
+      highlightsVisible = data.visible !== false;
+      console.log('[Obelos] Loaded', highlights.length, 'highlights and', anchors.length, 'anchors');
+    } catch (err) {
       console.error('[Obelos] Error loading data:', err);
-    });
+    }
   }
 
   // Save data to storage
-  function saveData() {
+  async function saveData() {
     const data = {
       highlights: highlights,
       anchors: anchors,
       visible: highlightsVisible
     };
     console.log('[Obelos] Saving data:', highlights.length, 'highlights,', anchors.length, 'anchors');
-    browserAPI.storage.local.set({ [pageKey]: data }).then(() => {
+
+    try {
+      if (window.ObelosStorage) {
+        await window.ObelosStorage.save(pageKey, data);
+      } else {
+        // Fallback to direct storage access
+        await browserAPI.storage.local.set({ [pageKey]: data });
+      }
       console.log('[Obelos] Data saved successfully');
-    }).catch(err => {
+    } catch (err) {
       console.error('[Obelos] Error saving data:', err);
-    });
+    }
   }
 
   // Create floating toolbar using iframe for complete isolation

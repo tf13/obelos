@@ -9,6 +9,7 @@ A powerful Firefox extension that allows you to highlight text, add annotations,
 ### ✨ Core Features
 - **6 Color Highlights**: Choose from yellow, green, blue, pink, orange, or purple
 - **Persistent Storage**: All highlights and bookmarks are saved locally and restored when you revisit the page
+- **Cross-Device Sync**: Optional sync via remoteStorage protocol to access highlights across browsers and devices
 - **Annotations**: Add notes to any highlight or bookmark
 - **Zero-Length Anchors**: Create bookmark markers at specific positions without selecting text
 - **Direct Linking**: Every highlight and bookmark gets a unique URL fragment that can be shared
@@ -46,6 +47,12 @@ A powerful Firefox extension that allows you to highlight text, add annotations,
 - Works on complex documents like SEC EDGAR filings
 - Uses iframe-based toolbar for style isolation
 - Compatible with XBRL and other XML formats
+
+### ☁️ Cross-Device Sync (Optional)
+- Sync highlights across browsers and devices using remoteStorage
+- Connect to providers like [5apps](https://5apps.com/storage) or self-hosted servers
+- Offline-first: works without internet, syncs when connected
+- Your data stays under your control
 
 ## Installation
 
@@ -109,7 +116,16 @@ Click the extension icon in your toolbar to access:
 - **View Statistics**: See how many highlights and bookmarks on this page
 - **Color Selection**: Change the active highlighting color
 - **Toggle Visibility**: Show/hide all highlights without deleting them
+- **Settings**: Configure storage options and sync
 - **Clear All**: Remove all highlights and bookmarks from the current page
+
+### Setting Up Cross-Device Sync
+
+1. Click the extension icon and select **Settings**
+2. Choose **remoteStorage** as your storage provider
+3. Connect to a remoteStorage provider (e.g., [5apps](https://5apps.com/storage))
+4. Your highlights will now sync across all connected browsers
+5. Use **Upload Local Data to Remote** to migrate existing highlights
 
 ### Sharing Links
 
@@ -128,10 +144,20 @@ Click the extension icon in your toolbar to access:
 
 ### Storage
 
+Two storage backends available:
+
+**Local Storage (Default)**
 - Uses Firefox's `browser.storage.local` API
 - Data is stored per-page URL (excluding URL fragments)
 - Highlights are stored with XPath information for precise restoration
 - All data persists across browser sessions
+
+**remoteStorage (Optional)**
+- Enable in Settings to sync across devices
+- Uses the [remoteStorage](https://remotestorage.io/) open protocol
+- Compatible with 5apps, self-hosted servers, or any remoteStorage provider
+- Full dataset syncs on startup
+- Saves locally first, then syncs (offline-first)
 
 ### URL Fragments
 
@@ -168,19 +194,20 @@ Bookmarks store:
 
 ```
 obelos/
-├── manifest.json          # Extension configuration
+├── manifest.json         # Extension configuration
 ├── content.js            # Main functionality script
 ├── content.css           # Styles for highlights and UI
-├── popup.html            # Browser action popup
-├── popup.css             # Popup styling
-├── popup.js              # Popup functionality
+├── storage.js            # Storage abstraction layer
+├── background.js         # Background script for sync
+├── rs-module.js          # remoteStorage module definition
+├── popup.html/css/js     # Browser action popup
+├── options.html/css/js   # Settings page
+├── lib/
+│   ├── remotestorage.min.js
+│   └── remotestorage-widget.js
 ├── icons/                # Extension icons
-│   ├── icon16.png
-│   ├── icon32.png
-│   ├── icon48.png
-│   └── icon96.png
-├── INSTALL.md           # Quick installation guide
-└── README.md            # This file
+├── INSTALL.md            # Quick installation guide
+└── README.md             # This file
 ```
 
 ## Browser Compatibility
@@ -201,8 +228,9 @@ obelos/
 
 ## Privacy
 
-- All data is stored locally in your browser
-- No data is sent to external servers
+- By default, all data is stored locally in your browser
+- Optional remoteStorage sync uses servers you choose and control
+- No data is sent to Obelos developers or third parties
 - No tracking or analytics
 - Your highlights and annotations are private
 
@@ -251,10 +279,8 @@ To modify the extension:
 
 Potential features for future versions:
 
-- Export/import highlights
 - Search through annotations
 - Highlight groups/collections
-- Sync across devices
 - PDF support
 - Custom color picker
 - Keyboard shortcuts

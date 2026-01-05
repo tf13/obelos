@@ -1,0 +1,379 @@
+/* Obelos Options Page Styles */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+}
+
+header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #222;
+}
+
+/* Sections */
+.settings-section {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.settings-section h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 8px;
+}
+
+.description {
+  color: #666;
+  margin-bottom: 16px;
+}
+
+/* Radio Group */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.radio-option:hover {
+  border-color: #999;
+  background: #fafafa;
+}
+
+.radio-option input[type="radio"] {
+  margin-top: 2px;
+}
+
+.radio-option input[type="radio"]:checked + .radio-label strong {
+  color: #2563eb;
+}
+
+.radio-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.radio-label strong {
+  font-weight: 600;
+}
+
+.radio-description {
+  font-size: 13px;
+  color: #666;
+}
+
+/* Status Bar */
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background: #f8f8f8;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ccc;
+}
+
+.status-indicator.connected {
+  background: #22c55e;
+}
+
+.status-indicator.disconnected {
+  background: #ef4444;
+}
+
+.status-indicator.syncing {
+  background: #f59e0b;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.status-text {
+  font-weight: 500;
+}
+
+/* Connect Form */
+.connect-form {
+  margin-bottom: 16px;
+}
+
+.connect-form label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.input-group input[type="text"] {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.input-group input[type="text"]:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+.input-help {
+  font-size: 12px;
+  color: #666;
+  margin-top: 6px;
+}
+
+/* Connected Info */
+.connected-info {
+  padding: 12px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.connected-info p {
+  margin-bottom: 8px;
+}
+
+/* remoteStorage Widget Container (kept for fallback) */
+#remotestorage-widget-anchor {
+  margin-bottom: 16px;
+  display: none;
+}
+
+/* Info Box */
+.info-box {
+  background: #f0f7ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 6px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.info-box h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #1e40af;
+}
+
+.info-box p {
+  font-size: 13px;
+  color: #1e3a5f;
+  margin-bottom: 8px;
+}
+
+.info-box ul {
+  margin-left: 20px;
+  margin-bottom: 8px;
+}
+
+.info-box li {
+  font-size: 13px;
+  color: #1e3a5f;
+}
+
+.info-box a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.info-box a:hover {
+  text-decoration: underline;
+}
+
+/* Stats */
+.stats {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.stat {
+  flex: 1;
+  text-align: center;
+  padding: 12px;
+  background: #f8f8f8;
+  border-radius: 6px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 24px;
+  font-weight: 600;
+  color: #222;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.actions.danger-zone {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #fee2e2;
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #2563eb;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.btn-secondary {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #d1d5db;
+}
+
+.btn-danger {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #fecaca;
+}
+
+/* Progress Bar */
+.progress-bar {
+  margin-top: 16px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  height: 24px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #2563eb;
+  width: 0%;
+  transition: width 0.3s;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 16px;
+  color: #999;
+  font-size: 12px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .stats {
+    flex-direction: column;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}

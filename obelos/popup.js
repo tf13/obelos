@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('clear-all').addEventListener('click', async () => {
     try {
       await browserAPI.tabs.sendMessage(activeTab.id, { action: 'clearAll' });
-      
+
       // Update UI
       state.highlightsCount = 0;
       state.anchorsCount = 0;
@@ -74,6 +74,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (e) {
       console.error('Error clearing all:', e);
     }
+  });
+
+  // Open settings
+  document.getElementById('open-settings').addEventListener('click', () => {
+    browserAPI.runtime.openOptionsPage();
   });
 
   // Update stats display

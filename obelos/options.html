@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obelos Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="icons/obelos_20251216-48.png" alt="Obelos" class="logo">
+      <h1>Obelos Settings</h1>
+    </header>
+
+    <main>
+      <!-- Storage Provider Section -->
+      <section class="settings-section">
+        <h2>Storage Provider</h2>
+        <p class="description">Choose where to store your highlights and annotations.</p>
+
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="storage-provider" value="local" checked>
+            <span class="radio-label">
+              <strong>Local Storage</strong>
+              <span class="radio-description">Data stored only in this browser. Fast and private, but not synced across devices.</span>
+            </span>
+          </label>
+
+          <label class="radio-option">
+            <input type="radio" name="storage-provider" value="remoteStorage">
+            <span class="radio-label">
+              <strong>remoteStorage</strong>
+              <span class="radio-description">Sync data across browsers and devices using your own storage provider.</span>
+            </span>
+          </label>
+        </div>
+      </section>
+
+      <!-- remoteStorage Connection Section -->
+      <section class="settings-section" id="rs-section" style="display: none;">
+        <h2>remoteStorage Connection</h2>
+        <p class="description">Connect to your remoteStorage provider to sync your data.</p>
+
+        <div class="status-bar" id="rs-status">
+          <span class="status-indicator disconnected"></span>
+          <span class="status-text">Not connected</span>
+        </div>
+
+        <!-- Manual Connection Form -->
+        <div id="rs-connect-form" class="connect-form">
+          <label for="rs-address">remoteStorage Address</label>
+          <div class="input-group">
+            <input type="text" id="rs-address" placeholder="user@example.com or user@5apps.com" />
+            <button id="rs-connect-btn" class="btn btn-primary">Connect</button>
+          </div>
+          <p class="input-help">Enter your remoteStorage address (e.g., yourname@5apps.com)</p>
+        </div>
+
+        <!-- Connected User Info (shown when connected) -->
+        <div id="rs-connected-info" class="connected-info" style="display: none;">
+          <p><strong>Connected as:</strong> <span id="rs-user-address"></span></p>
+          <button id="rs-disconnect-btn" class="btn btn-secondary">Disconnect</button>
+        </div>
+
+        <div class="actions" style="margin-top: 16px;">
+          <button id="sync-now" class="btn btn-secondary" disabled>
+            Sync Now
+          </button>
+        </div>
+
+        <div class="info-box">
+          <h3>What is remoteStorage?</h3>
+          <p>remoteStorage is an open protocol for personal data storage. You can use providers like:</p>
+          <ul>
+            <li><a href="https://5apps.com/storage" target="_blank">5apps Storage</a> (free tier available)</li>
+            <li><a href="https://remotestorage.io/" target="_blank">Self-hosted options</a></li>
+          </ul>
+          <p>Your data stays under your control and can be accessed by any remoteStorage-compatible app.</p>
+        </div>
+      </section>
+
+      <!-- Data Management Section -->
+      <section class="settings-section">
+        <h2>Data Management</h2>
+
+        <div class="stats" id="data-stats">
+          <div class="stat">
+            <span class="stat-value" id="pages-count">-</span>
+            <span class="stat-label">Pages with highlights</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" id="highlights-count">-</span>
+            <span class="stat-label">Total highlights</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" id="bookmarks-count">-</span>
+            <span class="stat-label">Total bookmarks</span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="export-data" class="btn btn-secondary">
+            Export Data
+          </button>
+          <button id="import-data" class="btn btn-secondary">
+            Import Data
+          </button>
+        </div>
+
+        <div class="actions danger-zone">
+          <button id="clear-all-data" class="btn btn-danger">
+            Clear All Data
+          </button>
+        </div>
+      </section>
+
+      <!-- Migration Section -->
+      <section class="settings-section" id="migration-section" style="display: none;">
+        <h2>Data Migration</h2>
+        <p class="description">Transfer your data between storage providers.</p>
+
+        <div class="actions">
+          <button id="migrate-to-remote" class="btn btn-primary">
+            Upload Local Data to Remote
+          </button>
+          <button id="migrate-to-local" class="btn btn-secondary">
+            Download Remote Data to Local
+          </button>
+        </div>
+
+        <div id="migration-progress" class="progress-bar" style="display: none;">
+          <div class="progress-fill"></div>
+          <span class="progress-text">Migrating...</span>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Obelos v1.0.0</p>
+    </footer>
+  </div>
+
+  <!-- Hidden file input for import -->
+  <input type="file" id="import-file" accept=".json" style="display: none;">
+
+  <!-- Scripts -->
+  <script src="lib/remotestorage.min.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
